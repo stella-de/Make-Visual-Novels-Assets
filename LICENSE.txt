@@ -1,0 +1,45 @@
+Make Visual Novels! Asset License (Version 1.0)
+
+The following license applies to the assets (including but not limited to code, scripts, images, audio, and other files) provided by Remort Studios, LLC (“we”, “us”, or “our”) under the Make Visual Novels! brand of assets.
+
+1. Grant of License
+
+You are granted a non-exclusive, non-transferable license to:
+
+- Use the assets in your own personal and commercial projects.
+- Modify the assets for use in your own projects.
+
+You may distribute completed projects (such as games, applications, or other works) that include these assets. 
+
+If the structure of your project makes it technically possible for others to access the assets (such as with Ren'Py games), you are not in violation of this license, provided that the assets are provided only as part of a complete, playable project and not as standalone files intended for reuse.
+
+2. Restrictions
+
+You may NOT:
+
+- Resell, sublicense, or otherwise redistribute the assets on their own, whether in original or modified form.
+- Share the assets with others outside of your project team for use in their own projects.
+- Claim ownership of the assets themselves.
+
+3. Attributation
+
+Attribution is appreciated but not required. You may credit Make Visual Novels! or Remort Studios, LLC if you choose.
+
+4. Ownership
+
+All rights, title, and interest in the original assets remain the exclusive property of Remort Studios, LLC. We reserve the right to distribute, modify, sell, or offer the assets for free or for donations at our discretion.
+
+5. Donations and Distribution by Us
+
+We may choose to host these assets on platforms that allow us to accept optional donations, set fixed prices, or offer the assets for free. This does not affect your license to use the assets in accordance with this agreement.
+
+6. Termination
+
+This license is automatically terminated if you violate any of its terms. Upon termination, you must remove the assets from any ongoing projects and discontinue all use.
+
+7. No Warranty
+
+These assets are provided “as-is,” without warranty of any kind. We are not liable for any damages arising from their use.
+
+Copyright © 2025 Remort Studios, LLC
+All Rights Reserved.

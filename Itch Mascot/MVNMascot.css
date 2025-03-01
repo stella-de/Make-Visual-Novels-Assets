@@ -1,0 +1,45 @@
+.custom-mascot img {
+  max-width: 15% !important;
+  position: fixed;
+  z-index: 999;
+  bottom: 20px;
+  right: 20px;
+  border-radius: 50%;
+  border: 2px solid black;
+}
+
+/*Name box design, optional*/
+.game_cell:hover::before {
+  content: "Lemon says:";
+  position: fixed;
+  top: 75.5%;
+  right: 15%;
+  background-color: white;
+  color: black;
+  padding: 10px 15px;
+  border-radius: 0;
+  font-size: 18px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  white-space: pre-wrap;
+  z-index: 9999;
+}
+
+.game_cell:hover::after {
+  position: fixed;
+  top: 77%;
+  right: 15%;
+  background-color: #fffef0;
+  color: black;
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: 3px solid black;
+  font-size: 20px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  white-space: pre-wrap;
+  z-index: 999;
+}
+
+.user_game_grid:nth-of-type(1) .game_cell:nth-of-type(1):hover::after { content: "\AHello World! This is a main game template."; }
+.collection_row:nth-of-type(1) .game_cell:nth-of-type(1):hover::after { content: "\AHello World! This is a collection template"; }
