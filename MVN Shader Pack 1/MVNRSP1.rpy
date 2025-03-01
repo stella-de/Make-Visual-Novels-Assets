@@ -109,15 +109,15 @@ init python:
         //It's really a function of the current frame multiplied against the designated speed.
 
 
-        vec2 q = vec2(0);
+        vec2 q = vec2(0.0);
         q.x = Perlin(uv);
-        q.y = Perlin(uv + 1);
+        q.y = Perlin(uv + 1.0);
 
 
-        vec2 r = vec2(0);
+        vec2 r = vec2(0.0);
         r.x = Perlin( uv + 1.0*q + vec2(1.7,9.2)+ 0.15 * frame );
         r.y = Perlin( uv + 1.0*q + vec2(8.3,2.8)+ 0.126 * frame);
-        return clamp(r, 0, 1);
+        return clamp(r, 0.0, 1.0);
     }
 
 
@@ -130,9 +130,9 @@ init python:
     aAberrationShader = """
         vec2 uv = v_tex_coord;        
         float offset =  cos(u_time * 1.3 * 3.14159) * (u_aberrationAmount * 0.001) ;
-        vec2 redUV = uv + vec2(offset, 0);
+        vec2 redUV = uv + vec2(offset, 0.0);
         vec2 greenUV = uv;
-        vec2 blueUV = uv - vec2(offset, 0);
+        vec2 blueUV = uv - vec2(offset, 0.0);
         vec2 alphaUV = uv;
 
 
@@ -149,9 +149,9 @@ init python:
     sAberationShader = """
         vec2 uv = v_tex_coord;        
         float offset =  u_aberrationAmount * 0.001;
-        vec2 redUV = uv + vec2(offset, 0);
+        vec2 redUV = uv + vec2(offset, 0.0);
         vec2 greenUV = uv;
-        vec2 blueUV = uv - vec2(offset, 0);
+        vec2 blueUV = uv - vec2(offset, 0.0);
         vec2 alphaUV = uv;
 
 
@@ -169,10 +169,10 @@ init python:
     colorDepth16Shader="""
         vec2 uv = v_tex_coord;
         vec4 color = texture2D(tex0, uv, u_lod_bias);
-        color.rgb = floor(color.rgb * 4) / 4;
+        color.rgb = floor(color.rgb * 4.0) / 4.0;
         if (color.a == 0.0 ) discard;
-        color += vec4(0.125,0.125,0.125, 0);
-        color.rgb = floor(color.rgb * 8) / 8;
+        color += vec4(0.125,0.125,0.125, 0.0);
+        color.rgb = floor(color.rgb * 8.0) / 8.0;
         gl_FragColor = color;
    """
 
@@ -180,7 +180,7 @@ init python:
     colorDepth256Shader="""
         vec2 uv = v_tex_coord;
         vec4 color = texture2D(tex0, uv, u_lod_bias);
-        color.rgb = floor(color.rgb * 8) / 8;
+        color.rgb = floor(color.rgb * 8.0) / 8.0;
         gl_FragColor = color;
     """
    
@@ -213,7 +213,7 @@ init python:
 
 
             //if mode is 0 bright factor is 1
-            color.rgb = ((color.rgb + noise * brightFactor) + (color.rgb * noise * darkFactor)) - color.rgb * (1 - brightFactor);
+            color.rgb = ((color.rgb + noise * brightFactor) + (color.rgb * noise * darkFactor)) - color.rgb * (1.0 - brightFactor);
             gl_FragColor = vec4(color.r,color.g, color.b, color.a);
     """
    
@@ -259,13 +259,13 @@ init python:
     float frame = floor(u_time * (u_fps));
     vec2 uv = v_tex_coord.st;
     vec2 distort = Noise2D(uv * u_scale, frame * u_speed);
-    distort = distort * 2 - 1; 
+    distort = distort * 2.0 - 1.0; 
     distort = smoothstep(u_minSmooth, u_maxSmooth, distort);  
     vec2 invertDistort = Noise2D(uv * u_flipScale, frame * u_flipSpeed);
    
     //This makes the effect invert itself every other frame, creating the edge adjustments.
     //Thanks Endiment for the assist on optimizing this!
-    float frameMod = step(mod(frame, 2), 0.01);
+    float frameMod = step(mod(frame, 2.0), 0.01);
     invertDistort = (invertDistort * (1-frameMod)) + ((1-invertDistort) * frameMod);
    
     //Also centered, should probably just consider making a centered UV for the noise effect.
@@ -311,7 +311,7 @@ init python:
 
     //Center the effect.  
     //Probably should consider centering the UV instead of this, but it works as is.
-    distort = distort * 2 - 1;
+    distort = distort * 2.0 - 1.0;
    
     //Smoothing to help remove hard edges from the main warp.
     distort = smoothstep(u_minSmooth, u_maxSmooth, distort);  
@@ -321,7 +321,7 @@ init python:
    
     //This makes the effect invert itself every other frame, creating the edge adjustments.
     //Thanks Endiment for the assist on optimizing this!
-    float frameMod = step(mod(frame, 2), 0.01);
+    float frameMod = step(mod(frame, 2.0), 0.01);
     invertDistort = (invertDistort * (1-frameMod)) + ((1-invertDistort) * frameMod);
    
     //Also centered, should probably just consider making a centered UV for the noise effect.
