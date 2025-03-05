@@ -16,12 +16,12 @@ init -1500 python:
     float frame = floor(u_time * (u__fps));
     vec2 uv = v__uv;
     vec2 distort = Noise2D(uv * u__scale, frame * u__speed);
-    distort = distort * 2 - 1; 
+    distort = distort * 2.0 - 1.0; 
     distort = smoothstep(u__minSmooth, u__maxSmooth, distort);  
     vec2 invertDistort = Noise2D(uv * u__flipScale, frame * u__flipSpeed);
     float frameMod = step(mod(frame, 2), 0.01);
     invertDistort = (invertDistort * (1-frameMod)) + ((1-invertDistort) * frameMod);
-    invertDistort = invertDistort * 2. - 1.;  
+    invertDistort = invertDistort * 2.0 - 1.0;  
     vec2 distortedUV = uv + distort * (u__warpIntensity * 0.0001) + invertDistort * (u__flipIntensity * 0.0001);
     vec4 color = texture2D(tex0, distortedUV, u_lod_bias);
     for (float x = -u__glow_radius; x <= u__glow_radius; x += u__glow_radius / 4.0) {
@@ -52,12 +52,12 @@ init -1500 python:
     float frame = floor(u_time * (u__fps));
     vec2 uv = v__uv;
     vec2 distort = Noise2D(uv * u__scale, frame * u__speed);
-    distort = distort * 2 - 1; 
+    distort = distort * 2.0 - 1.0; 
     distort = smoothstep(u__minSmooth, u__maxSmooth, distort);  
     vec2 invertDistort = Noise2D(uv * u__flipScale, frame * u__flipSpeed);
-    float frameMod = step(mod(frame, 2), 0.01);
+    float frameMod = step(mod(frame, 2.0), 0.01);
     invertDistort = (invertDistort * (1-frameMod)) + ((1-invertDistort) * frameMod);
-    invertDistort = invertDistort * 2. - 1.;  
+    invertDistort = invertDistort * 2.0 - 1.0;  
     vec2 distortedUV = uv + distort * (u__warpIntensity * 0.0001) + invertDistort * (u__flipIntensity * 0.0001);
     vec4 color = texture2D(tex0, distortedUV, u_lod_bias);
     
@@ -124,13 +124,13 @@ init -1500 python:
     vec2 Noise2D(vec2 uv, float frame)
     {
     
-        vec2 q = vec2(0);
+        vec2 q = vec2(0.0);
         q.x = Perlin(uv);
         q.y = Perlin(uv + 1);
-        vec2 r = vec2(0);
+        vec2 r = vec2(0.0);
         r.x = Perlin( uv + 1.0*q + vec2(1.7,9.2)+ 0.15 * frame );
         r.y = Perlin( uv + 1.0*q + vec2(8.3,2.8)+ 0.126 * frame);
-        return clamp(r, 0, 1);
+        return clamp(r, 0.0, 1.0);
     }
     """
 
@@ -326,7 +326,7 @@ init -1500 python:
     }
     glow_color /= (4.0 * u__glow_radius * u__glow_radius);    
     vec4 final = text_color + (glow_color * u__glow_intensity);
-    vec4 hollowfinal=  (text_color + glow_color * u__glow_intensity) * (1- text_color.a);
+    vec4 hollowfinal=  (text_color + glow_color * u__glow_intensity) * (1.0- text_color.a);
     gl_FragColor = hollowfinal;
     """,
     u__end_color="#FF00FF",
