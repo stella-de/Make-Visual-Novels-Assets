@@ -322,6 +322,23 @@ init python:
     ]
       # u__color="#FF0000FF"
 
+    def highlightsimple_tag(tag, argument, contents):
+        return [
+        (renpy.TEXT_TAG, u"shader=HighlightSimple"),
+    ] + contents + [
+        (renpy.TEXT_TAG, u"/shader"),
+    ]
+    # u__highlightcolor="#FFF719FF"
+
+    def highlightrecolor_tag(tag, argument, contents):
+        return [
+        (renpy.TEXT_TAG, u"shader=HighlightRecolor"),
+    ] + contents + [
+        (renpy.TEXT_TAG, u"/shader"),
+    ]
+    # u__textcolor="#000000FF"
+    # u__highlightcolor="#FFF719FF"
+
     def reversed_tag(tag, argument, contents):
         return [
         (renpy.TEXT_TAG, u"shader=Reversed"),
@@ -433,6 +450,8 @@ init python:
     config.custom_text_tags["goldsweep"] = goldsweep_tag
     config.custom_text_tags["colorsweep"] = colorsweep_tag
     config.custom_text_tags["textshadow"] = textshadow_tag
+    config.custom_text_tags["hl"] = highlightsimple_tag
+    config.custom_text_tags["hlrc"] = highlightrecolor_tag
     config.custom_text_tags["gradient"] = gradient_tag
     config.custom_text_tags["reversed"] = reversed_tag
     config.custom_text_tags["flipped"] = flipped_tag

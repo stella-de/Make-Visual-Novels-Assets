@@ -686,6 +686,41 @@ init -1500 python:
     )
 
     renpy.register_textshader(
+        "HighlightSimple",
+        variables="""
+        uniform vec4 u__highlightcolor;
+        """,
+
+        vertex_300="""
+        """,
+
+        fragment_300="""
+        float highlight = 1.0 - gl_FragColor.a;       
+        gl_FragColor = gl_FragColor + (highlight * u__highlightcolor);
+        """,
+        u__highlightcolor="#FBF719FF"
+    )
+
+    renpy.register_textshader(
+        "HighlightRecolor",
+        variables="""
+        uniform vec4 u__highlightcolor;
+        uniform vec4 u__textcolor;
+        """,
+
+        vertex_300="""
+        """,
+
+        fragment_300="""
+        float highlight = 1.0 - gl_FragColor.a;  
+        vec4 inverted = vec4((vec3(1.0) - gl_FragColor.rgb), gl_FragColor.a)*gl_FragColor.a; 
+        gl_FragColor = u__textcolor + (highlight * u__highlightcolor);
+        """,
+        u__textcolor = "#000000FF",
+        u__highlightcolor="#FBF719FF"
+    )
+
+    renpy.register_textshader(
     "Reversed",
 
     variables="""
