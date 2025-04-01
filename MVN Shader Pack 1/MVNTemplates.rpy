@@ -15,24 +15,30 @@
 # Oh, if you use these shaders on layered sprites, make sure you've got Mesh set to true.
 
 transform AnimatedAberate:
+    mesh True
     shader "MakeVisualNovels.AnimatedAberration"
     u_aberrationAmount(10.0)
 
 transform StillAberate:
+    mesh True
     shader "MakeVisualNovels.StillAberration"
     u_aberrationAmount(10.0)
 
 transform IntenseAberate:
+    mesh True
     shader "MakeVisualNovels.StillAberration"
     u_aberrationAmount(50.0)
 
 transform bits16:
+    mesh True
     shader "MakeVisualNovels.256colors"
 
 transform bits8:
+    mesh True
     shader "MakeVisualNovels.16colors"
    
 transform VHS:
+    mesh True
     shader "MakeVisualNovels.VHS"
     #Color applies a shift in color.
     #Remember R G B A.  Values are expressed between 0.0 and 1.0
@@ -42,6 +48,7 @@ transform VHS:
     u_color (1.0, 1.0, 1.0, 1.0)
 
 transform WhiteNoise:
+    mesh True
     shader "MakeVisualNovels.Static"
     #See #Color section at the bottom for details.
     u_color (1.0, 1.0, 1.0, 1.0)
@@ -53,6 +60,7 @@ transform WhiteNoise:
     u_mode (0.0)
 
 transform Static:
+    mesh True
     shader "MakeVisualNovels.Static"
     #See #Color section at the bottom for details.
     u_color (1.0, 1.0, 1.0, 1.0)
@@ -69,6 +77,7 @@ transform Static:
 # It may make them too awesome.
 
 transform TransRights:
+    mesh True
     shader "MakeVisualNovels.SimulatedLighting"
     u_back_light_color (1.0, 1.0, 1.0) # White  
     u_key_light_color (0.0, 0.0, 1.0)  # Blue  
@@ -83,6 +92,7 @@ transform TransRights:
     u_fill_light_intensity (-0.7)
 
 transform TheFuzz:
+    mesh True
     shader "MakeVisualNovels.SimulatedLighting"
     u_back_light_color (1.0, 0.0, 1.0)  
     u_key_light_color (0.7, 0.7, 1.0)    
@@ -102,6 +112,7 @@ transform TheFuzz:
 # Doesn't look good, but it does demonstrate the various areas you can illuminate.    
 
 transform LightDemo:
+    mesh True
     shader "MakeVisualNovels.SimulatedLighting"  
     u_key_light_color (1.0, 0.0, 1.0)
     u_back_light_color (1.0,1.0,0.0)  
@@ -151,6 +162,7 @@ transform LightDemo:
 # This was specifically designed to work on a background but it'd work on anything really.
 
 transform DramaticRevealBG:
+    mesh True
     shader "MakeVisualNovels.SimulatedLighting"  
     u_key_light_color (1.0, 1.0, 1.0)
     u_back_light_color (0.0,0.0,0.0)  
@@ -206,6 +218,7 @@ transform DramaticRevealBG:
 #This, when used with tandem with the BG shader, will produce a staggered visual effect that will (usually) reveal the character first.
 
 transform DramaticReveal:
+    mesh True
     shader "MakeVisualNovels.SimulatedLighting"  
     u_key_light_color (1.0, 0.3, 0.3)
     u_back_light_color (0.0,0.0,0.0)  
@@ -334,6 +347,7 @@ default raveRightColor = (0.2,0.7,0.7)
 default raveLeftColor = (0.7,0.7,0.2)
 
 transform RaveLights:
+    mesh True
     #Hey, we're not liable if you use this template as is.  It does contain flashing lights
     #Because it's a rave template.
     shader "MakeVisualNovels.SimulatedLighting"  
@@ -374,6 +388,7 @@ transform RaveLights:
 # It may make them too awesome.
 
 transform Bisexuality:
+    mesh True
     shader "MakeVisualNovels.SimulatedLighting"
     u_back_light_color (1.0, 0.0, 1.0)  
     u_key_light_color (0.7, 0.7, 1.0)    
@@ -390,6 +405,7 @@ transform Bisexuality:
 
 # A Preset for the Simulated Lighting Shader
 transform SunsetLighting:
+    mesh True
     shader "MakeVisualNovels.SimulatedLighting"
     u_back_light_color (0.9, 0.7, 0.4)  
     u_key_light_color (0.0, 0.0, 0.5)
@@ -406,6 +422,7 @@ transform SunsetLighting:
 
 # Default Settings for characters, because they're pretty decent
 transform SimulatedLighting:
+    mesh True
     shader "MakeVisualNovels.SimulatedLighting"
     u_back_light_color (1.0, 1.0, 1.0)  
     u_key_light_color (1.0, 1.0, 1.0)    
@@ -425,6 +442,7 @@ transform SimulatedLighting:
 
 
 transform Regicide:
+    mesh True
     shader "MakeVisualNovels.PerlinWarp"
     # How many changes per second.
     # Higher is more energetic.
@@ -448,6 +466,7 @@ transform Regicide:
     #to make RenPy actually render it properly.
     
 transform VirtualBoy:
+    mesh True
     #Why
     shader "MakeVisualNovels.Manga"
     u_color (0.7, 0.1, 0.1, 1.0)
@@ -455,6 +474,7 @@ transform VirtualBoy:
     u_intensity (0.6)
 
 transform Manga:
+    mesh True
     shader "MakeVisualNovels.Manga"
     #Makes the fill color transparent.
     u_color (0.0,0.0,0.0,0.0) 
@@ -462,6 +482,7 @@ transform Manga:
     u_intensity (0.6)
 
 transform TakeOnMe:
+    mesh True
     shader "MakeVisualNovels.TakeOnMe"
     #Intensity here is 0 to 1 and determines how much of the darker colors are crushed to black.
     u_color (1.0,1.0,1.0,1.0)
