@@ -248,25 +248,24 @@ init python:
     newSimLightingShader = """
     vec2 uv = v_tex_coord;
     vec4 color = texture2D(tex0, uv, u_lod_bias);
-    if (color.a < 0.01) discard;
+    if (color.a < 0.01) discard; //I'm still lazy
     float a0 = color.a;
-    float a1 = texture2D(tex0, uv + vec2(0.004, 0.0)).a;
-    float a2 = texture2D(tex0, uv - vec2(0.004, 0.0)).a;
-    float a3 = texture2D(tex0, uv + vec2(0.0, 0.004)).a;
-    float a4 = texture2D(tex0, uv - vec2(0.0, 0.004)).a;
+    float a1 = texture2D(tex0, uv + vec2(0.008, 0.0)).a;
+    float a2 = texture2D(tex0, uv - vec2(0.008, 0.0)).a;
+    float a3 = texture2D(tex0, uv + vec2(0.0, 0.008)).a;
+    float a4 = texture2D(tex0, uv - vec2(0.0, 0.008)).a;
     float alpha_gradient = max(
         abs(a0 - a1),
         max(abs(a0 - a2),
         max(abs(a0 - a3),
             abs(a0 - a4)))
     );
-    float glow_width = 0.8; //Might need to make a knob for this, but I can't find a configuration beyond this that looks good so??
+    float glow_width = 1.0; //Knob, maybe?
     float edge_glow = smoothstep(0.0, glow_width, alpha_gradient);
     float dist_to_rim = distance(uv, u_rim_light_position);
     float rim_falloff = smoothstep(u_rim_light_radius * 0.7, u_rim_light_radius, dist_to_rim);
-    float feather = smoothstep(0.0, 2.0, edge_glow);
-    //ayy your girl learned how to power curve
-    float falloff = pow(feather * (1.0 - rim_falloff), 1.5);
+    float feather = smoothstep(0.0, 3.0, edge_glow);
+    float falloff = pow(feather * (1.0 - rim_falloff), 0.5); // This and feathering need knobs.
     vec3 rim_light = u_rim_light_color * falloff * u_rim_light_intensity;
     vec3 fill_light_contribution = u_fill_light_color * u_fill_light_intensity;
     float key_light_distance = distance(uv, u_key_light_position);

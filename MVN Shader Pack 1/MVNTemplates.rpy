@@ -397,7 +397,7 @@ transform Bisexuality:
     u_fill_light_direction (-1.0, 0.0)       
     u_key_light_intensity (0.7)          
     u_fill_light_intensity (-0.5)      
-    u_rim_light_radius (0.25)
+    u_rim_light_radius (0.5)
     u_rim_light_position (0.5, 0.2) 
     u_rim_light_intensity (1.0)
     u_rim_light_color (1.0, 0.0, 1.0)        
