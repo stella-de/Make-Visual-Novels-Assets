@@ -41,6 +41,21 @@ init python:
         uniform float u_key_light_radius; // Radius of the key light
     """
 
+    newSimLightVars = """
+    uniform vec3 u_fill_light_color; // Color of the fill light
+    uniform vec3 u_key_light_color; // Color of the key light
+    //uniform vec2 u_fill_light_direction; This actually was never implemented in either version.  Whoops.
+    uniform vec2 u_key_light_position; // Position of the key light
+    uniform float u_fill_light_intensity; // Intensity of the fill light
+    uniform float u_key_light_intensity; // Intensity of the key light
+    uniform float u_key_light_radius; // Radius of the key light
+    uniform vec2 u_rim_light_position;     // Center of the rim light (UV space)
+    uniform float u_rim_light_radius;      // Radius of the rim effect
+    uniform float u_rim_light_intensity;   // Intensity of the rim light
+    uniform vec3 u_rim_light_color;        // Color of the rim light
+
+    """
+
     perlinShaderVars = """
     //Perlin Variables here
     uniform float u_warpIntensity;
@@ -129,7 +144,7 @@ init python:
 
     aAberrationShader = """
         vec2 uv = v_tex_coord;        
-        float offset =  cos(u_time * 1.3 * 3.14159) * (u_aberrationAmount * 0.001) ;
+        float offset =  cos(u_time * 1.3 * 3.14159) * (u_aberrationAmount * 0.001);
         vec2 redUV = uv + vec2(offset, 0.0);
         vec2 greenUV = uv;
         vec2 blueUV = uv - vec2(offset, 0.0);
@@ -230,12 +245,43 @@ init python:
             gl_FragColor = vec4(color.r,color.g, color.b, color.a);
     """
 
+    newSimLightingShader = """
+    vec2 uv = v_tex_coord;
+    vec4 color = texture2D(tex0, uv, u_lod_bias);
+    if (color.a < 0.01) discard;
+    float a0 = color.a;
+    float a1 = texture2D(tex0, uv + vec2(0.004, 0.0)).a;
+    float a2 = texture2D(tex0, uv - vec2(0.004, 0.0)).a;
+    float a3 = texture2D(tex0, uv + vec2(0.0, 0.004)).a;
+    float a4 = texture2D(tex0, uv - vec2(0.0, 0.004)).a;
+    float alpha_gradient = max(
+        abs(a0 - a1),
+        max(abs(a0 - a2),
+        max(abs(a0 - a3),
+            abs(a0 - a4)))
+    );
+    float glow_width = 0.8; //Might need to make a knob for this, but I can't find a configuration beyond this that looks good so??
+    float edge_glow = smoothstep(0.0, glow_width, alpha_gradient);
+    float dist_to_rim = distance(uv, u_rim_light_position);
+    float rim_falloff = smoothstep(u_rim_light_radius * 0.7, u_rim_light_radius, dist_to_rim);
+    float feather = smoothstep(0.0, 2.0, edge_glow);
+    //ayy your girl learned how to power curve
+    float falloff = pow(feather * (1.0 - rim_falloff), 1.5);
+    vec3 rim_light = u_rim_light_color * falloff * u_rim_light_intensity;
+    vec3 fill_light_contribution = u_fill_light_color * u_fill_light_intensity;
+    float key_light_distance = distance(uv, u_key_light_position);
+    float key_light_falloff = smoothstep(u_key_light_radius, 0.0, key_light_distance);
+    vec3 key_light_contribution = u_key_light_color * key_light_falloff * u_key_light_intensity;
+    vec3 final_color = (color.rgb + rim_light + fill_light_contribution + key_light_contribution) * color.a;
+    gl_FragColor = vec4(final_color, color.a);
+    """
 
+    #This is the old simulated lighting shader with the whack backlight implementation.  I kept it around for now.
     simulatedLightingShader = """
         vec2 uv = v_tex_coord;
         vec4 color = texture2D(tex0, uv, u_lod_bias);
         if(color.a < 0.01) discard; //Gross but I'm lazy.
-        // Back lighting
+        // Back lighting??
         float edge_factor = 1.0 - smoothstep(0.0, 0.05, min(uv.x, 1.0 - uv.x) * min(uv.y, 1.0 - uv.y));
         vec2 to_light = normalize(uv - u_back_light_position);
         float back_light = max(dot(to_light, u_back_light_direction), 0.0);
@@ -248,7 +294,6 @@ init python:
         vec3 key_light_contribution = u_key_light_color * key_light_intensity * u_key_light_intensity;
         // Combine lighting contributions, but also respect the original color's alpha because that's how we roll.
         vec3 final_color = (color.rgb + fill_light_contribution + back_light_contribution + key_light_contribution) * color.a;
-        
         // Output the final color
         gl_FragColor = vec4(final_color, color.a);
     """
@@ -418,7 +463,7 @@ init python:
         fragment_300=staticNoiseShader)
 
 
-    renpy.register_shader("MakeVisualNovels.SimulatedLighting",
+    renpy.register_shader("MakeVisualNovels.OldSimulatedLighting",
         variables=commonVars+simulatedLightingVars,
         fragment_300=simulatedLightingShader)
 
@@ -429,7 +474,9 @@ init python:
         vertex_200="",
         fragment_300=mangaStyleShader)
 
-
+    renpy.register_shader("MakeVisualNovels.SimulatedLighting",
+        variables=commonVars+newSimLightVars,
+        fragment_300=newSimLightingShader)
 
 
 

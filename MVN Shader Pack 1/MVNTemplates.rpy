@@ -79,30 +79,30 @@ transform Static:
 transform TransRights:
     mesh True
     shader "MakeVisualNovels.SimulatedLighting"
-    u_back_light_color (1.0, 1.0, 1.0) # White  
+    u_rim_light_color (1.0, 1.0, 1.0) # White  
     u_key_light_color (0.0, 0.0, 1.0)  # Blue  
     u_fill_light_color (0.0, 0.25, 0.2)  # Pink (subtracted from 1)
-    u_back_light_direction (1.5, -0.5)
-    u_back_light_position (0.0, -0.5)
+    u_rim_light_radius (0.5)
+    u_rim_light_position (0.25, 0.5)
     u_key_light_position (0.45, 0.2)
     u_key_light_radius (0.5)  
     u_fill_light_direction (-1.0, 0.0)  
-    u_back_light_intensity (2.0)          
+    u_rim_light_intensity (4.0)          
     u_key_light_intensity (1.0)          
     u_fill_light_intensity (-0.7)
 
 transform TheFuzz:
     mesh True
     shader "MakeVisualNovels.SimulatedLighting"
-    u_back_light_color (1.0, 0.0, 1.0)  
+    u_rim_light_color (1.0, 0.0, 1.0)  
     u_key_light_color (0.7, 0.7, 1.0)    
     u_fill_light_color (1.0, 1.0, 1.0)    
-    u_back_light_direction (1.5, -0.5)
-    u_back_light_position (0.0, -0.5)
+    u_rim_light_radius (0.8)
+    u_rim_light_position (0.0, 0.5)
     u_key_light_position (0.2, 0.2)
     u_key_light_radius (1.0)  
     u_fill_light_direction (-1.0, 0.0)  
-    u_back_light_intensity (1.0)          
+    u_rim_light_intensity (1.0)          
     u_key_light_intensity (0.7)          
     u_fill_light_intensity (-0.5) 
 
@@ -115,45 +115,45 @@ transform LightDemo:
     mesh True
     shader "MakeVisualNovels.SimulatedLighting"  
     u_key_light_color (1.0, 0.0, 1.0)
-    u_back_light_color (1.0,1.0,0.0)  
-    u_back_light_direction (0.75,0.0)
-    u_back_light_position (0.0,1.0)
+    u_rim_light_color (1.0,1.0,0.0)  
+    u_rim_light_radius (0.5)
+    u_rim_light_position (0.0,1.0)
     u_fill_light_color (1.0, 1.0, 1.0)
     u_key_light_position (0.2, 0.2)
     u_key_light_radius (0.25)  
     u_fill_light_direction (-1.0, 0.0)  
-    u_back_light_intensity (1.0)          
+    u_rim_light_intensity (1.0)          
     u_key_light_intensity (2.0)          
     u_fill_light_intensity (-1.0)  
     block:  
         u_key_light_radius(0.25)
         ease 1 u_key_light_position (0.0, 0.0)
-        ease 1 u_back_light_direction (0.0,0.0)
-        ease 1 u_back_light_position (0.0,0.0)
+        u_rim_light_radius (0.5)
+        ease 1 u_rim_light_position (0.0,0.0)
         pause 2
         ease 1 u_key_light_position (1.0, 1.0)
-        ease 1 u_back_light_direction (1.0,1.0)
-        ease 1 u_back_light_position (1.0,1.0)
+        u_rim_light_radius (0.5)
+        ease 1 u_rim_light_position (1.0,1.0)
         pause 2
         ease 1 u_key_light_position (0.5, 0.5)
-        ease 1 u_back_light_direction (0.0,0.0)
-        ease 1 u_back_light_position (1.0,1.0)
+        u_rim_light_radius (0.5)
+        ease 1 u_rim_light_position (1.0,1.0)
         pause 2
         ease 1 u_key_light_radius (0.5)
-        ease 1 u_back_light_direction (-1.0,-1.0)
-        ease 1 u_back_light_position (1.0,1.0)
+        u_rim_light_radius (0.5)
+        ease 1 u_rim_light_position (1.0,1.0)
         pause 2
         ease 1 u_key_light_position (0.0,0.0)
-        ease 1 u_back_light_direction (-1.0,-1.0)
-        ease 1 u_back_light_position (0.0,0.0)
+        u_rim_light_radius (0.5)
+        ease 1 u_rim_light_position (0.0,0.0)
         pause 2
         ease 1 u_key_light_position (0.0, 1.0)
-        ease 1 u_back_light_direction (2.0,2.0)
-        ease 1 u_back_light_position (0.0,0.0)
+        u_rim_light_radius (0.5)
+        ease 1 u_rim_light_position (0.0,0.0)
         pause 2
         ease 1 u_key_light_position (1.0, 0.0)
-        ease 1 u_back_light_direction (-2.0,-2.0)
-        ease 1 u_back_light_position (2.0,2.0)
+        u_rim_light_radius (0.5)
+        ease 1 u_rim_light_position (2.0,2.0)
         pause 2
         pause 2
         repeat
@@ -165,14 +165,14 @@ transform DramaticRevealBG:
     mesh True
     shader "MakeVisualNovels.SimulatedLighting"  
     u_key_light_color (1.0, 1.0, 1.0)
-    u_back_light_color (0.0,0.0,0.0)  
-    u_back_light_direction (10.75,0.0)
-    u_back_light_position (0.0,1.0)
+    u_rim_light_color (0.0,0.0,0.0)  
+    u_rim_light_radius (0.5)
+    u_rim_light_position (0.0,1.0)
     u_fill_light_color (1.0, 1.0, 1.0)
     u_key_light_position (0.5, 0.0)
     u_key_light_radius (0.05)  
     u_fill_light_direction (-1.0, 0.0)  
-    u_back_light_intensity (1.0)          
+    u_rim_light_intensity (1.0)          
     u_key_light_intensity (1.0)          
     u_fill_light_intensity (-1.0)  
     block:  
@@ -221,14 +221,14 @@ transform DramaticReveal:
     mesh True
     shader "MakeVisualNovels.SimulatedLighting"  
     u_key_light_color (1.0, 0.3, 0.3)
-    u_back_light_color (0.0,0.0,0.0)  
-    u_back_light_direction (0.75,0.0)
-    u_back_light_position (0.0,1.0)
+    u_rim_light_color (0.0,0.0,0.0)  
+    u_rim_light_radius (0.5)
+    u_rim_light_position (0.0,1.0)
     u_fill_light_color (1.0, 1.0, 1.0)
     u_key_light_position (0.5, 0.0)
     u_key_light_radius (0.05)  
     u_fill_light_direction (-1.0, 0.0)  
-    u_back_light_intensity (3.0)          
+    u_rim_light_intensity (3.0)          
     u_key_light_intensity (1.0)          
     u_fill_light_intensity (-1.0)  
     block:  
@@ -266,11 +266,11 @@ transform DramaticReveal:
     linear .5 u_key_light_radius (1.0)
     u_fill_light_intensity (-0.5)
     pause 0.7
-    u_back_light_color (1.0,1.0,1.0)
+    u_rim_light_color (1.0,1.0,1.0)
     u_key_light_position(0.5,0.3)
     u_key_light_radius(0.5)
     linear 0.2 u_key_light_intensity (0.1)
-    linear 4 u_back_light_intensity (0.0)
+    linear 4 u_rim_light_intensity (0.0)
     
     block:
         ease 0.25 u_fill_light_intensity (-0.20)
@@ -286,14 +286,14 @@ transform DramaticLayerReveal:
     mesh True
     shader "MakeVisualNovels.SimulatedLighting"  
     u_key_light_color (1.0, 1.0, 1.0)
-    u_back_light_color (0.0,0.0,0.0)  
-    u_back_light_direction (0.75,0.0)
-    u_back_light_position (0.0,1.0)
+    u_rim_light_color (0.0,0.0,0.0)  
+    u_rim_light_radius (0.5)
+    u_rim_light_position (0.0,1.0)
     u_fill_light_color (1.0, 1.0, 1.0)
     u_key_light_position (0.5, 0.0)
     u_key_light_radius (0.25)  
     u_fill_light_direction (-1.0, 0.0)  
-    u_back_light_intensity (3.0)          
+    u_rim_light_intensity (3.0)          
     u_key_light_intensity (0.0)          
     u_fill_light_intensity (-1.0)  
     block:  
@@ -334,7 +334,7 @@ transform DramaticLayerReveal:
     u_key_light_position(0.5,0.3)
     u_key_light_radius(0.5)
     linear 0.2 u_key_light_intensity (0.1)
-    linear 4 u_back_light_intensity (0.0)
+    linear 4 u_rim_light_intensity (0.0)
     block:
         ease 0.25 u_fill_light_intensity (-0.20)
         ease 0.5 u_fill_light_intensity (-0.15)
@@ -352,34 +352,34 @@ transform RaveLights:
     #Because it's a rave template.
     shader "MakeVisualNovels.SimulatedLighting"  
     u_key_light_color (0.2, 0.2, 0.7)
-    u_back_light_color (0.0,0.0,1.0)  
-    u_back_light_direction (0.75,0.0)
-    u_back_light_position (0.0,1.0)
+    u_rim_light_color (0.0,0.0,1.0)  
+    u_rim_light_radius (0.8)
+    u_rim_light_position (0.0,0.3)
     u_fill_light_color (1.0, 1.0, 1.0)
     u_key_light_position (0.2, 0.2)
     u_key_light_radius (0.6)  
     u_fill_light_direction (-1.0, 0.0)  
-    u_back_light_intensity (0.25)          
+    u_rim_light_intensity (1.5)          
     u_key_light_intensity (0.7)          
     u_fill_light_intensity (-0.5)  
     block:  
-        u_back_light_direction (0,5.0)
-        u_back_light_position (1.0,0.0)
+        u_rim_light_radius (0.5)
+        u_rim_light_position (1.0,0.5)
         ease 0.10 u_key_light_color (raveRightColor)   
-        u_back_light_color (raveRightRimColor)
+        u_rim_light_color (raveRightRimColor)
         pause 0.1
-        ease 0.10 u_back_light_color (0.0,0.5,0.5)
+        ease 0.10 u_rim_light_color (0.0,0.5,0.5)
         pause 0.1 
-        ease 0.1 u_back_light_color (0.0,1.0,1.0)
+        ease 0.1 u_rim_light_color (0.0,1.0,1.0)
         pause 0.2
-        u_back_light_direction (-2.5,0.0)
-        u_back_light_position (1.0,1.0)
+        u_rim_light_radius (0.8)
+        u_rim_light_position (0.0,0.3)
         ease 0.10 u_key_light_color (raveLeftColor)  
-        u_back_light_color (raveLeftRimColor)
+        u_rim_light_color (raveLeftRimColor)
         pause 0.1
-        ease 0.10 u_back_light_color (0.5, 0.5, 0.0)
+        ease 0.10 u_rim_light_color (0.5, 0.5, 0.0)
         pause 0.1
-        ease 0.10 u_back_light_color (1.0, 1.0, 0.0)
+        ease 0.10 u_rim_light_color (1.0, 1.0, 0.0)
         pause 0.2
         repeat  
  
@@ -390,32 +390,32 @@ transform RaveLights:
 transform Bisexuality:
     mesh True
     shader "MakeVisualNovels.SimulatedLighting"
-    u_back_light_color (1.0, 0.0, 1.0)  
     u_key_light_color (0.7, 0.7, 1.0)    
     u_fill_light_color (1.0, 1.0, 1.0)    
-    u_back_light_direction (1.5, -0.5)
-    u_back_light_position (0.0, -0.5)
     u_key_light_position (0.2, 0.2)
     u_key_light_radius (1.0)  
-    u_fill_light_direction (-1.0, 0.0)  
-    u_back_light_intensity (1.0)          
+    u_fill_light_direction (-1.0, 0.0)       
     u_key_light_intensity (0.7)          
-    u_fill_light_intensity (-0.5)        
+    u_fill_light_intensity (-0.5)      
+    u_rim_light_radius (0.25)
+    u_rim_light_position (0.5, 0.2) 
+    u_rim_light_intensity (1.0)
+    u_rim_light_color (1.0, 0.0, 1.0)        
 
 
 # A Preset for the Simulated Lighting Shader
 transform SunsetLighting:
     mesh True
     shader "MakeVisualNovels.SimulatedLighting"
-    u_back_light_color (0.9, 0.7, 0.4)  
+    u_rim_light_color (0.9, 0.7, 0.4)  
     u_key_light_color (0.0, 0.0, 0.5)
     u_fill_light_color (0.4, 0.9, 0.9)  
-    u_back_light_direction (1.5, -0.5)
-    u_back_light_position (0.25, -0.5)
+    u_rim_light_radius (1.0)
+    u_rim_light_position (0.25, -0.5)
     u_key_light_position (0.45, 0.2)  
     u_key_light_radius (0.8)    
     u_fill_light_direction (-1.0, 0.0)  
-    u_back_light_intensity (4.0)      
+    u_rim_light_intensity (8.0)      
     u_key_light_intensity (0.4)          
     u_fill_light_intensity (-0.5)      
 
@@ -424,18 +424,19 @@ transform SunsetLighting:
 transform SimulatedLighting:
     mesh True
     shader "MakeVisualNovels.SimulatedLighting"
-    u_back_light_color (1.0, 1.0, 1.0)  
+    u_rim_light_color (1.0, 1.0, 1.0)  
     u_key_light_color (1.0, 1.0, 1.0)    
     u_fill_light_color (1.0, 1.0, 1.0) # This is typically SUBTRACTED from the sprite since sprites are usually 100% lit.
-    u_back_light_direction (1.5, -0.5)
-    # Direction of the back light (towards the camera)
-    u_back_light_position (0.25, -0.5)  
+    # The size of the rim light relative to the size of the graphic you're putting this on.
+    u_rim_light_radius (0.5)
+    # Positions the effect of the rimlight
+    u_rim_light_position (0.5, 0.2)  
     # This will be, on average, pretty close to most sprites' faces
     # assuming they're nearly centered in their images and are about 20% down from the top
     u_key_light_position (0.45, 0.2)  
     u_key_light_radius (0.8)        # This is relative to the thing you're lighting. 0.5 is half the size of the thing.  
     u_fill_light_direction (-1.0, 0.0)   # Direction of the rim light (from the side and behind)
-    u_back_light_intensity (1.0)             # Intensity of the back light
+    u_rim_light_intensity (0.2)             # Intensity of the rim light
     u_key_light_intensity (0.5)              # Intensity of the key light
     # This is really a fill shadow, because light works differently on screens.
     u_fill_light_intensity (-0.5)  
