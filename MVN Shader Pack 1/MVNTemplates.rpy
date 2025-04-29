@@ -408,16 +408,18 @@ transform SunsetLighting:
     mesh True
     shader "MakeVisualNovels.SimulatedLighting"
     u_rim_light_color (0.9, 0.7, 0.4)  
-    u_key_light_color (0.0, 0.0, 0.5)
+    u_key_light_color (0.9, 0.7, 0.4 )
     u_fill_light_color (0.4, 0.9, 0.9)  
-    u_rim_light_radius (1.0)
-    u_rim_light_position (0.25, -0.5)
-    u_key_light_position (0.45, 0.2)  
-    u_key_light_radius (0.8)    
+    u_rim_light_radius (0.4)
+    u_key_light_position (0.1,0.182)
+    u_rim_light_position (0.1,0.182)
+    u_key_light_radius (0.6)    
     u_fill_light_direction (-1.0, 0.0)  
-    u_rim_light_intensity (8.0)      
-    u_key_light_intensity (0.4)          
-    u_fill_light_intensity (-0.5)      
+    u_rim_light_intensity (2.0)      
+    u_key_light_intensity (0.8)          
+    u_fill_light_intensity (-0.5)  
+    pause 0
+    repeat    
 
 
 # Default Settings for characters, because they're pretty decent

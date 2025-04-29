@@ -31,6 +31,8 @@ init python:
 init -1500 python:
     MVNMouseX = 0.0
     MVNMouseY = 0.0
+    MVNRPYMouseX = None
+    MVNRPYMouseY = None
 
     def MouseLight(trans, st, at):
         location = getMousePos()
@@ -43,11 +45,22 @@ init -1500 python:
         return location
 
     def MonitorMouse():
-        global MVNMouseX, MVNMouseY
+        global MVNMouseX, MVNMouseY, MVNRPYMouseX, MVNRPYMouseY
         step = 0.001
         location = getMousePos()
         MVNMouseX = round(location[0] / step) * step
         MVNMouseY = round(location[1] / step) * step
+        MVNRPYMouseX, MVNRPYMouseY = renpy.get_mouse_pos()
+    
+    def getMouseY():
+        import pygame;
+        x, y= pygame.mouse.get_pos()
+        return (y)
+    
+    def getMouseX():
+        import pygame;
+        x, y= pygame.mouse.get_pos()
+        return (x)
 
 screen display_coordinates():
     frame:
@@ -58,6 +71,8 @@ screen display_coordinates():
             text "Mouse X,Y"
             text "X: [MVNMouseX]" 
             text "Y: [MVNMouseY]"
+            text "Pixel X: [MVNRPYMouseX]"
+            text "Pixel Y: [MVNRPYMouseY]"
             timer 0.1 action Function(MonitorMouse) repeat True
 
 
@@ -100,16 +115,16 @@ transform MouseRimLight:
     mesh True
     function MouseLight
     shader "MakeVisualNovels.SimulatedLighting"
-    u_fill_light_color (1.0,1.0,0.6)
-    u_key_light_color (1.0,0.7,0.5)
-    u_fill_light_direction (-1.0, 0.0)
+    u_fill_light_color (1.0,1.0,1.0)
+    u_key_light_color (1.0,1.0,0.8)
+    u_fill_light_direction (0.0, 0.0)
     u_key_light_position (0.5,0.2)
     u_fill_light_intensity (-0.5)
-    u_key_light_intensity (0.5)
-    u_key_light_radius (0.5)
-    u_rim_light_radius (0.3)
-    u_rim_light_intensity (1.0)
-    u_rim_light_color (1.0,0.8,0.0)
+    u_key_light_intensity (0.6)
+    u_key_light_radius (0.7)
+    u_rim_light_radius (1.0)
+    u_rim_light_intensity (0.9)
+    u_rim_light_color (1.0,1.0,1.0)
     pause 0
     repeat
 
