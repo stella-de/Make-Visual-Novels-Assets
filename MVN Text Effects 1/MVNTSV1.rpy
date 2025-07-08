@@ -10,7 +10,6 @@ init -1500 python:
     """
 
     TwarpFragmentShader = """
-    const float MAX_LOOPS = 100.0;
     vec4 text_color = texture2D(tex0, v__uv);
     vec4 glow_color = vec4(0.0);
     float frame = floor(u_time * (u__fps));
@@ -24,15 +23,14 @@ init -1500 python:
     invertDistort = invertDistort * 2.0 - 1.0;  
     vec2 distortedUV = uv + distort * (u__warpIntensity * 0.0001) + invertDistort * (u__flipIntensity * 0.0001);
     vec4 color = texture2D(tex0, distortedUV, u_lod_bias);
-    for (float x = -u__glow_radius; x <= MAX_LOOPS; x += u__glow_radius / 4.0) {
-    if(x > u__glow_radius) {
-            break;
-        }
-        for (float y = -u__glow_radius; y <= MAX_LOOPS; y += u__glow_radius / 4.0) {
-         if(y > u__glow_radius) {
-            break;
-        }
-            vec2 offset = vec2(x, y) / u_model_size;
+    const float MAX_LOOPS = 100.0;
+    for (float x = 0.0; x <= MAX_LOOPS; x++) {
+        if((u__glow_radius * 2.0) - (x*u__glow_radius*0.25) <= 0.0) break;
+        for (float y = 0.0; y <= MAX_LOOPS; y++) {
+            if((u__glow_radius * 2.0) - (y*u__glow_radius*0.25) <= 0.0) break;
+            float offx = u__glow_radius - distance((u__glow_radius * 2.0), x*u__glow_radius*0.25);
+            float offy = u__glow_radius - distance((u__glow_radius * 2.0), y*u__glow_radius*0.25);
+            vec2 offset = vec2(offx, offy) / u_model_size;
             glow_color += texture2D(tex0, distortedUV + offset) * mix(u__glow_color, u__end_color,1.0 - v__uv.y);
         }
     }
@@ -52,7 +50,6 @@ init -1500 python:
 """
 
     TwarpFragmentAdjustableDemo= """
-    const float MAX_LOOPS = 100.0;
     vec4 text_color = texture2D(tex0, v__uv);
     vec4 glow_color = vec4(0.0);
     float frame = floor(u_time * (u__fps));
@@ -73,19 +70,17 @@ init -1500 python:
     float mix_factor = mod(v__uv.y * 0.02 + v__uv.y * 0.02, 1.0);
    
    
-    for (float x = -u__glow_radius; x <= MAX_LOOPS; x += u__glow_radius / 4.0) {
-     if(x > u__glow_radius) {
-            break;
-        }
-        for (float y = -u__glow_radius; y <= MAX_LOOPS; y += u__glow_radius / 4.0) {
-         if(y > u__glow_radius) {
-            break;
-        }
+   const float MAX_LOOPS = 100.0;
+    for (float x = 0.0; x <= MAX_LOOPS; x++) {
+        if((u__glow_radius * 2.0) - (x*u__glow_radius*0.25) <= 0.0) break;
+        for (float y = 0.0; y <= MAX_LOOPS; y++) {
+            if((u__glow_radius * 2.0) - (y*u__glow_radius*0.25) <= 0.0) break;
+            float offx = u__glow_radius - distance((u__glow_radius * 2.0), x*u__glow_radius*0.25);
+            float offy = u__glow_radius - distance((u__glow_radius * 2.0), y*u__glow_radius*0.25);
+            vec2 offset = vec2(offx, offy) / u_model_size;
         
-        vec2 offset = vec2(x, y) / u_model_size;
-        
-        // Mix two colors dynamically over time
-        float mix_factor = mod(v__uv.y + x * 0.02 + y * 0.02, 1.0);
+       
+        float mix_factor = mod(v__uv.y + x*u__glow_radius*0.25 * 0.02 + y*u__glow_radius*0.25 * 0.02, 1.0);
         vec4 final_glow_color = mix(rainbowColorA, rainbowColorB, mix_factor * (sin(u_time * 0.5) * 0.5 + 0.5)); 
 
         // Apply to glow
@@ -97,7 +92,7 @@ init -1500 python:
     vec4 final = text_color + (glow_color * u__glow_intensity);
     gl_FragColor = final;  
     """
-
+    
 
     TperlinShaderVars = """
     uniform float u__warpIntensity;
@@ -329,19 +324,16 @@ init -1500 python:
     """,
 
     fragment_300="""
-    const float MAX_LOOPS = 100.0;
     vec4 text_color = texture2D(tex0, v__uv);
     vec4 glow_color = vec4(0.0);
-    
-    for (float x = -u__glow_radius; x <= MAX_LOOPS; x += u__glow_radius / 4.0) {
-        if(x > u__glow_radius) {
-            break;
-        }
-        for (float y = -u__glow_radius; y <= MAX_LOOPS; y += u__glow_radius / 4.0) {
-            if(y > u__glow_radius) {
-            break;
-        }
-            vec2 offset = vec2(x, y) / u_model_size;
+    const float MAX_LOOPS = 100.0;
+    for (float x = 0.0; x <= MAX_LOOPS; x++) {
+        if((u__glow_radius * 2.0) - (x*u__glow_radius*0.25) <= 0.0) break;
+        for (float y = 0.0; y <= MAX_LOOPS; y++) {
+            if((u__glow_radius * 2.0) - (y*u__glow_radius*0.25) <= 0.0) break;
+            float offx = u__glow_radius - distance((u__glow_radius * 2.0), x*u__glow_radius*0.25);
+            float offy = u__glow_radius - distance((u__glow_radius * 2.0), y*u__glow_radius*0.25);
+            vec2 offset = vec2(offx, offy) / u_model_size;
             glow_color += texture2D(tex0, v__uv + offset) * mix(u__glow_color, u__end_color,max(1.0 - v__uv.x,1.0 - v__uv.y));
         }
     }
@@ -371,18 +363,17 @@ init -1500 python:
     v__uv = a_tex_coord;
     """,
     fragment_300="""
-    const float MAX_LOOPS = 100.0;
+   
     vec4 text_color = texture2D(tex0, v__uv);
     vec4 glow_color = vec4(0.0);
-    for (float x = -u__glow_radius; x <= MAX_LOOPS; x += u__glow_radius / 4.0) {
-     if(x > u__glow_radius) {
-            break;
-        }
-        for (float y = -u__glow_radius; y <= MAX_LOOPS; y += u__glow_radius / 4.0) {
-         if(y > u__glow_radius) {
-            break;
-        }
-            vec2 offset = vec2(x, y) / u_model_size;
+    const float MAX_LOOPS = 100.0;
+    for (float x = 0.0; x <= MAX_LOOPS; x++) {
+        if((u__glow_radius * 2.0) - (x*u__glow_radius*0.25) <= 0.0) break;
+        for (float y = 0.0; y <= MAX_LOOPS; y++) {
+            if((u__glow_radius * 2.0) - (y*u__glow_radius*0.25) <= 0.0) break;
+            float offx = u__glow_radius - distance((u__glow_radius * 2.0), x*u__glow_radius*0.25);
+            float offy = u__glow_radius - distance((u__glow_radius * 2.0), y*u__glow_radius*0.25);
+            vec2 offset = vec2(offx, offy) / u_model_size;
             glow_color += texture2D(tex0, v__uv + offset) * mix(u__glow_color, u__end_color,max(1.0 - v__uv.x,1.0 - v__uv.y));
         }
     }
@@ -415,21 +406,21 @@ init -1500 python:
     """,
 
     fragment_300="""
-    const float MAX_LOOPS = 100.0;
+    
     vec4 text_color = texture2D(tex0, v__uv);
     vec4 glow_color = vec4(0.0);
-    for (float x = -u__glow_radius; x <= MAX_LOOPS; x += u__glow_radius / 4.0) {
-        if(x > u__glow_radius) {
-            break;
-        }
-        for (float y = -u__glow_radius; y <= MAX_LOOPS; y += u__glow_radius / 4.0) {
-            if(x > u__glow_radius) {
-            break;
-        }
-            vec2 offset = vec2(x, y) / u_model_size;
+    const float MAX_LOOPS = 100.0;
+    for (float x = 0.0; x <= MAX_LOOPS; x++) {
+        if((u__glow_radius * 2.0) - (x*u__glow_radius*0.25) <= 0.0) break;
+        for (float y = 0.0; y <= MAX_LOOPS; y++) {
+            if((u__glow_radius * 2.0) - (y*u__glow_radius*0.25) <= 0.0) break;
+            float offx = u__glow_radius - distance((u__glow_radius * 2.0), x*u__glow_radius*0.25);
+            float offy = u__glow_radius - distance((u__glow_radius * 2.0), y*u__glow_radius*0.25);
+            vec2 offset = vec2(offx, offy) / u_model_size;
             glow_color += texture2D(tex0, v__uv + offset) * u__glow_color;
         }
     }
+
     glow_color /= (4.0 * u__glow_radius * u__glow_radius);
     gl_FragColor = text_color + glow_color * u__glow_intensity;
     """,
@@ -439,6 +430,19 @@ init -1500 python:
     u__glow_radius=5.0,         # Default glow radius
 )
 
+
+    """
+    
+
+    for (float x = -u__glow_radius; x <= MAX_LOOPS; x += u__glow_radius / 4.0) {
+        if(u__glow_radius - x <= 0.0) break;
+        for (float y = -u__glow_radius; y <= MAX_LOOPS; y += u__glow_radius / 4.0) {
+            if(u__glow_radius - y <= 0.0) break;
+            vec2 offset = vec2(x, y) / u_model_size;
+            glow_color += texture2D(tex0, v__uv + offset) * u__glow_color;
+        }
+    }
+    """
 
 
     renpy.register_textshader(
