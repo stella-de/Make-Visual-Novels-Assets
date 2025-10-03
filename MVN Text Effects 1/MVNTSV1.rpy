@@ -31,7 +31,7 @@ init -1500 python:
             float offx = u__glow_radius - distance((u__glow_radius * 2.0), x*u__glow_radius*0.25);
             float offy = u__glow_radius - distance((u__glow_radius * 2.0), y*u__glow_radius*0.25);
             vec2 offset = vec2(offx, offy) / u_model_size;
-            glow_color += texture2D(tex0, distortedUV + offset) * mix(u__glow_color, u__end_color,1.0 - v__uv.y);
+            glow_color += texture2D(tex0, distortedUV + offset).a * mix(u__glow_color, u__end_color,1.0 - v__uv.y);
         }
     }
 
@@ -84,7 +84,7 @@ init -1500 python:
         vec4 final_glow_color = mix(rainbowColorA, rainbowColorB, mix_factor * (sin(u_time * 0.5) * 0.5 + 0.5)); 
 
         // Apply to glow
-        glow_color += texture2D(tex0, distortedUV + offset) * final_glow_color;
+        glow_color += texture2D(tex0, distortedUV + offset).a * final_glow_color;
     }
 }
     

@@ -310,10 +310,10 @@ init python:
     //This makes the effect invert itself every other frame, creating the edge adjustments.
     //Thanks Endiment for the assist on optimizing this!
     float frameMod = step(mod(frame, 2.0), 0.01);
-    invertDistort = (invertDistort * (1-frameMod)) + ((1-invertDistort) * frameMod);
+    invertDistort = (invertDistort * (1.0-frameMod)) + ((1.0-invertDistort) * frameMod);
    
     //Also centered, should probably just consider making a centered UV for the noise effect.
-    invertDistort = invertDistort * 2. - 1.;  
+    invertDistort = invertDistort * 2.0 - 1.0;  
     //Deliberately did NOT smooth the invert to keep its jagged edges.
    
     //The dampening needs to be fairly severe based on the normal Perlin noise calculations.
@@ -325,7 +325,7 @@ init python:
     //Uncomment to visualize the noise using the provided settings.
     //color = vec4(1,1,1,1); // White
     //vec3 biLamp = vec3(distort.x * 0.2 + 0.5, 0, distort.y * 0.2 + 0.5);
-    //color.rgb *= mix(vec3(1.), biLamp, 1);
+    //color.rgb *= mix(vec3(1.), biLamp, 1.0);
    
     //Uncomment to visualize the inverted noise using the provided settings
     //This produces rapid flashing, so uncomment with caution.
@@ -366,7 +366,7 @@ init python:
     //This makes the effect invert itself every other frame, creating the edge adjustments.
     //Thanks Endiment for the assist on optimizing this!
     float frameMod = step(mod(frame, 2.0), 0.01);
-    invertDistort = (invertDistort * (1-frameMod)) + ((1-invertDistort) * frameMod);
+    invertDistort = (invertDistort * (1.0-frameMod)) + ((1.0-invertDistort) * frameMod);
    
     //Also centered, should probably just consider making a centered UV for the noise effect.
     invertDistort = invertDistort * 2. - 1.;  
@@ -382,13 +382,13 @@ init python:
     //Uncomment to visualize the noise using the provided settings.
     //color = vec4(1,1,1,1); // White
     //vec3 biLamp = vec3(distort.x * 0.2 + 0.5, 0, distort.y * 0.2 + 0.5);
-    //color.rgb *= mix(vec3(1.), biLamp, 1);
+    //color.rgb *= mix(vec3(1.), biLamp, 1.0);
    
     //Uncomment to visualize the inverted noise using the provided settings
     //This produces rapid flashing, so uncomment with caution.
     //color = vec4(1,1,1,1); //White
     //vec3 lavaLamp = vec3(invertDistort.x * 0.2 + 0.5, invertDistort.y * 0.2 + 0.5, 1);
-    //color.rgb *= mix(vec3(1.), lavaLamp, 1);
+    //color.rgb *= mix(vec3(1.), lavaLamp, 1.0);
    
     if (color.a == 0.0) discard;
     vec3 hsv = rgb2hsv(color.rgb);
@@ -402,10 +402,32 @@ init python:
     gl_FragColor = color;
     """
 
+    
+    mangaDeluxVars = """
+    uniform vec4 u_manga_dark_color;
+    uniform vec4 u_manga_light_color;
+    uniform float u_manga_intensity;
+    uniform float u_state;
+        """
+    
+    mangaDeluxStyleShader="""
+        vec4 col = gl_FragColor;
+        if (col.a == 0.0) discard;
+        vec3 hsv = rgb2hsv(col.rgb);
+        if (hsv.z < u_manga_intensity || hsv.y < 0.0025) {  // Adjust the thresholds as needed
+        col *= u_manga_dark_color;
+        } else {
+        col= u_manga_light_color;
+        }
+        gl_FragColor = mix(gl_FragColor, col, u_state);
+    """
+
+    renpy.register_shader("MakeVisualNovels.MangaDeluxe",
+        variables=mangaDeluxVars,
+        fragment_functions=hsvFunctions,
+        fragment_300=mangaDeluxStyleShader)
 
     #Shader Registration
-
-
     renpy.register_shader("MakeVisualNovels.PerlinWarp",
         variables=commonVars+perlinShaderVars,
         vertex_functions="",

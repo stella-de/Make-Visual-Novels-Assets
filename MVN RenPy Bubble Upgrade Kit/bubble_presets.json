@@ -1,0 +1,126 @@
+{
+  "bubble_presets": {
+    "Top Left": {
+      "area": [
+        320,
+        180,
+        560,
+        270
+      ],
+      "properties": "top_left"
+    },
+    "Top Right": {
+      "area": [
+        1200,
+        405,
+        480,
+        270
+      ],
+      "properties": "top_right"
+    },
+    "Bottom Full": {
+      "area": [
+        200,
+        600,
+        800,
+        200
+      ],
+      "properties": "thought"
+    },
+    "Thought (Center)": {
+      "area": [
+        800,
+        405,
+        480,
+        270
+      ],
+      "properties": "thought"
+    },
+    "Page Left": {
+      "area": [
+        200,
+        200,
+        600,
+        800
+      ],
+      "properties": "page"
+    },
+    "Page Right": {
+      "area": [
+        1200,
+        200,
+        600,
+        800
+      ],
+      "properties": "page"
+    },
+    "Psuedo NVL": {
+      "area": [
+        560,
+        90,
+        880,
+        900
+      ],
+      "properties": "thought"
+    },
+    "Psuedo ADV": {
+      "area": [
+        200,
+        800,
+        1600,
+        200
+      ],
+      "properties": "thought"
+    }    
+  },
+  "size_presets": {
+    "Small": {
+      "area": [
+        0,
+        0,
+        300,
+        150
+      ]
+    },
+    "Wide": {
+      "area": [
+        0,
+        0,
+        800,
+        200
+      ]
+    },
+    "Medium": {
+      "area": [
+        0,
+        0,
+        400,
+        200
+      ]
+    },
+    "Page": {
+      "area": [
+        0,
+        0,
+        600,
+        800
+      ]
+    },
+    "Extra Big": {
+      "area": [
+        560,
+        90,
+        880,
+        900
+      ]
+    },
+    "Extra Wide": {
+      "area": [
+        0,
+        0,
+        1600,
+        200
+      ]
+    }
+  }
+}

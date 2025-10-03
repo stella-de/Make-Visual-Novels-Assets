@@ -71,13 +71,12 @@ transform MVNVignette:
     u_vin_strength (0.5)     # 0.0 = no effect, 1.0 = full tint
     u_vin_center (0.5, 0.5)  # center of screen
     u_vin_tint (0.0, 0.0, 0.0)  # black for classic vignette
-
-""" I cheated and turned it into a string to comment this out.   
+   
 transform NightLighting:
     mesh True
     shader "MakeVisualNovels.SimulatedLighting"
     u_rim_light_color (0.1, 0.7, 0.9)  
-    u_key_light_color (0.4, 0.7, 0.9 )
+    u_key_light_color (0.4, 0.7, 0.9)
     u_fill_light_color (0.9, 0.9, 0.7)  
     u_rim_light_radius (0.4)
     u_key_light_position (0.1,0.182)
@@ -89,7 +88,7 @@ transform NightLighting:
     u_fill_light_intensity (-0.5)  
     pause 0
     repeat   
-"""
+
 
 transform MVNBubbles: 
     shader "MakeVisualNovels.BokehTransparent"
@@ -156,7 +155,7 @@ transform AddBokeh:
     blend "add"
     u_circles (100.0)
     u_density (50.0)
-    u_speed (0.003)
+    u_speed (0.003, 0.0)
     u_brightness (0.8)
     u_scale_min (0.02)
     u_scale_max (0.06)
@@ -167,15 +166,15 @@ transform AddBokeh:
     repeat
 
 transform Bokeh:
-    shader "MakeVisualNovels.Bokeh"
+    shader "MakeVisualNovels.BokehTransparent"
     u_circles (15.0)
     u_density (1.0)
-    u_speed (0.003)
+    u_speed (0.003, 0.0)
     u_brightness (2.0)
     u_scale_min (0.02)
     u_scale_max (0.06)
-    u_color1 (1.0, 0.8, 0.9)
-    u_color2 (1.0, 0.9, 0.7)
+    u_color1 (1.0, 0.8, 0.9, 0.5)
+    u_color2 (1.0, 0.9, 0.7, 0.5)
     u_seed (5.0)
     pause 0
     repeat

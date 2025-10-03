@@ -476,7 +476,17 @@ transform VirtualBoy:
     #Intensity here is 0 to 1 and determines how much of the darker colors are crushed to black.
     u_intensity (0.6)
 
-transform Manga:
+transform Manga(child, intensity=0.8,light=(1.0,1.0,1.0,1.0), dark=(0.01,0.01, 0.01, 1.0)):
+    shader "MakeVisualNovels.MangaDeluxe"
+    mesh True
+    u_manga_intensity (intensity)
+    u_manga_light_color (light)
+    u_manga_dark_color (dark)
+    u_state (1.0)
+    #The New Manga shader now has a dark and light color setting, as well as a state setting.
+    #At 1.0, the Manga effect is on.  At 0.0, it's suppressed.  You can use this for neat animated effects.
+
+transform OldManga:
     mesh True
     shader "MakeVisualNovels.Manga"
     #Makes the fill color transparent.
